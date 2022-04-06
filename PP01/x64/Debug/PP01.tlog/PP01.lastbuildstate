@@ -1,2 +1,7 @@
+<<<<<<< HEAD
 PlatformToolSet=v143:VCToolArchitecture=Native64Bit:VCToolsVersion=14.31.31103:TargetPlatformVersion=10.0.19041.0:VcpkgTriplet=x64-windows:
 Debug|x64|C:\Users\YUHAN\source\repos\PP01\|
+=======
+PlatformToolSet=v143:VCToolArchitecture=Native64Bit:VCToolsVersion=14.31.31103:TargetPlatformVersion=10.0.19041.0:
+Debug|x64|C:\Users\1202h\source\repos\PP01\|
+>>>>>>> 76f250f8008bb7215e1b00086780f14c3b197ec0

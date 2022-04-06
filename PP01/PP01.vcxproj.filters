@@ -15,10 +15,17 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <ClCompile Include="Lecture02.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Lecture02-2.cpp">
+=======
+    <ClCompile Include="PP01.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="PP02.cpp">
+>>>>>>> 76f250f8008bb7215e1b00086780f14c3b197ec0
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
