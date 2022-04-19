@@ -2,6 +2,8 @@
 #include <chrono>
 #include <thread>
 #include "MConsolUtil.hpp"
+#include "Player.hpp"
+#include "Block.hpp"
 
 using namespace std;
 
@@ -9,13 +11,16 @@ namespace MuSeoun_Engine
 {
 	class MGameLoop
 	{
-	private :
-		bool _isGameRunning;	
+	private:
+		bool _isGameRunning;
 		MConsoleRenderer cRenderer;
-		chrono::system_clock::time_point starttime;
-		
-	public :
-		MGameLoop() 	{	_isGameRunning = false;		}
+		chrono::system_clock::time_point startRenderTimePoint;
+		chrono::duration<double> renderDuration;
+		Player p;
+		Block b;
+
+	public:
+		MGameLoop() { _isGameRunning = false; }
 		~MGameLoop() {}
 
 		void Run()
@@ -23,13 +28,14 @@ namespace MuSeoun_Engine
 			_isGameRunning = true;
 			Initialize();
 
+			startRenderTimePoint = chrono::system_clock::now();
 			while (_isGameRunning)
 			{
-				
+
 				Input();
 				Update();
 				Render();
-				;
+
 			}
 			Release();
 		}
@@ -38,69 +44,86 @@ namespace MuSeoun_Engine
 			_isGameRunning = false;
 		}
 
-	private :
+	private:
 		void Initialize()
 		{
-			
+
 		}
-		void Release() 
+		void Release()
 		{
 		}
 
 		void Input()
 		{
-		/*	if (GetAsyncKeyState(VK_SPACE) & 0x8000 || GetAsyncKeyState(VK_SPACE) & 0x8001)
-			{ 
-		
-			}
-			else 
+			if (GetAsyncKeyState(VK_SPACE) & 0x8000 || GetAsyncKeyState(VK_SPACE) & 0x8001)
 			{
-			
-			}*/
-			starttime = chrono::system_clock::now();
+				p.isKeyPressed();
+			}
+			else
+			{
+				p.isKeyUnpressed();
+			}
+
 		}
 		void Update()
 		{
-			
+
 		}
 		void Render()
 		{
-			chrono::system_clock::time_point startRenderTimePoint = chrono::system_clock::now();
-			//now는 클럭타임을 사람이 이해할 수있는 초단위로 OS가 바꿔줌
-			//그래서 chrono::syste_clock::now()
-			 
+
 			cRenderer.Clear();
-			
+			b.blockMove();
+			if (b.x == p.x) {
+				if (b.y == p.y) {
+					b.blockcheck = true;
+				}
+			}
+			if (b.x <= 10) {
+				b.x = 40;
+				b.blockcheck = false;
+			}
+			if (b.blockcheck) {
+				cRenderer.Clear();
+				cRenderer.MoveCursor(20, 6);
+				cRenderer.DrawString("닿았대요 다시하고 싶으면 R눌러바");
+				while (b.blockcheck) {
+					if (GetAsyncKeyState(0x52) & 0x8000 || GetAsyncKeyState(0x52) & 0x8001) { //R키=0x52 입력체크하기
+						b.blockcheck = false;
+						break;
+					}
+				}
+				b.x = 40; b.y = 7; //B 초기화
+			}
+			cRenderer.MoveCursor(1, 1);
+			cRenderer.DrawString(to_string(b.y));
+			cRenderer.MoveCursor(1, 2);
+			cRenderer.DrawString(to_string(p.y));
+
+			cRenderer.MoveCursor(p.x, p.y);
+			cRenderer.DrawString("P");
+
+
+			cRenderer.MoveCursor(b.x, b.y);
+			cRenderer.DrawString("B");
+
+
 			cRenderer.MoveCursor(10, 20);
 
 
-			//chrono::duration<double> renderDuration = chrono::system_clock::now() - startRenderTimePoint;
-			//
-			////현재 시각- 과거의 시각 = 각각의 시각 차이는 걸린시간
-			//string fps = "FPS(milliseconds) : " + to_string(int(renderDuration.count()));
-			//cRenderer.DrawString(fps);
+			renderDuration = chrono::system_clock::now() - startRenderTimePoint;
+			startRenderTimePoint = chrono::system_clock::now();
+			string fps = "FPS : " + to_string(1.0 / renderDuration.count());
+			cRenderer.DrawString(fps);
 
-			chrono::duration<double> EndDuration = chrono::system_clock::now() - starttime;
-			EndDuration *= 1000;
-			cout << " 1FPS(milliseconds) : " + to_string(int(EndDuration.count()));
-			system("PAUSE");
+			this_thread::sleep_for(chrono::milliseconds(20));
 		}
 
 
-			////cout << "Rendering speed : " << renderDuration.count() << "sec" << endl;
+		////cout << "Rendering speed : " << renderDuration.count() << "sec" << endl;
 
-			//int remainingFrameTime = 100 - (int)(renderDuration.count() * 1000.0);
-			//if (remainingFrameTime > 0)
-			//	this_thread::sleep_for(chrono::milliseconds(remainingFrameTime));
-		
-
-				
-		
+		//int remainingFrameTime = 100 - (int)(renderDuration.count() * 1000.0);
+		//if (remainingFrameTime > 0)
+		//	this_thread::sleep_for(chrono::milliseconds(remainingFrameTime));
 	};
-
-	
-
-
-	
-
 }
