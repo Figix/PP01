@@ -18,7 +18,6 @@ namespace MuSeoun_Engine
 		chrono::duration<double> renderDuration;
 		Player p;
 		Block b;
-
 	public:
 		MGameLoop() { _isGameRunning = false; }
 		~MGameLoop() {}
@@ -47,7 +46,7 @@ namespace MuSeoun_Engine
 	private:
 		void Initialize()
 		{
-
+			Block* b2 = new Block(rand()%7);
 		}
 		void Release()
 		{
@@ -63,38 +62,30 @@ namespace MuSeoun_Engine
 			{
 				p.isKeyUnpressed();
 			}
+			
+			if (GetAsyncKeyState(0x52) & 0x8000 || GetAsyncKeyState(0x52) & 0x8001) { //R키=0x52 입력체크하기
+				b.blockcheck = false; //break;와 동일한 상황
+				b.movex = 1; b.x = 40; b.y = 7; //B 위치 초기화 및 속도 초기화
+			}
+
 
 		}
 		void Update()
 		{
-
+			if (b.x == p.x && b.y == p.y) {
+				b.blockcheck = true;
+			}
+			if (b.blockcheck) {				//충돌시 blockeck가 true값이 되어서 해당 문장 들어감
+				b.movex = 0;
+			}
 		}
 		void Render()
 		{
-
 			cRenderer.Clear();
-			b.blockMove();
-			if (b.x == p.x) {
-				if (b.y == p.y) {
-					b.blockcheck = true;
-				}
-			}
-			if (b.x <= 10) {
-				b.x = 40;
-				b.blockcheck = false;
-			}
-			if (b.blockcheck) {
-				cRenderer.Clear();
-				cRenderer.MoveCursor(20, 6);
-				cRenderer.DrawString("닿았대요 다시하고 싶으면 R눌러바");
-				while (b.blockcheck) {
-					if (GetAsyncKeyState(0x52) & 0x8000 || GetAsyncKeyState(0x52) & 0x8001) { //R키=0x52 입력체크하기
-						b.blockcheck = false;
-						break;
-					}
-				}
-				b.x = 40; b.y = 7; //B 초기화
-			}
+			
+			b.blockMove(p.x, p.y);
+			
+
 			cRenderer.MoveCursor(1, 1);
 			cRenderer.DrawString(to_string(b.y));
 			cRenderer.MoveCursor(1, 2);
@@ -103,13 +94,16 @@ namespace MuSeoun_Engine
 			cRenderer.MoveCursor(p.x, p.y);
 			cRenderer.DrawString("P");
 
-
 			cRenderer.MoveCursor(b.x, b.y);
 			cRenderer.DrawString("B");
 
-
+			if (b.blockcheck) {	//충돌시 blockeck가 true값이 되어서 해당 문장 들어감
+				cRenderer.MoveCursor(10, 17);
+				cRenderer.DrawString("닿았대요 다시하고 싶으면 R눌러바");
+				b.movex = 0;
+			}
+			
 			cRenderer.MoveCursor(10, 20);
-
 
 			renderDuration = chrono::system_clock::now() - startRenderTimePoint;
 			startRenderTimePoint = chrono::system_clock::now();
@@ -117,6 +111,7 @@ namespace MuSeoun_Engine
 			cRenderer.DrawString(fps);
 
 			this_thread::sleep_for(chrono::milliseconds(20));
+			//출력 후 0.02초동안 여유 시간을 가지고 다시 게임루프돌음
 		}
 
 

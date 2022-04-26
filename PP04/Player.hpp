@@ -3,10 +3,14 @@ namespace MuSeoun_Engine {
 	{
 	public:
 		short x, y;
+		short moveY;
+
 		Player()
 		{
 			x = 20;
 			y = 7;
+
+			moveY = 1;
 		}
 		~Player()
 		{
@@ -15,13 +19,20 @@ namespace MuSeoun_Engine {
 
 		void isKeyPressed()
 		{
-			y = 5;
+			//y = 5;
+			// 나누는 용도 //
+			y -= moveY;
 		}
 
 		void isKeyUnpressed()
 		{
-			y = 7;
+			//y = 7;
+			// 나누는 용도 //
+			y += moveY;
+			if (y >= 8) { y = 7; }
 		}
+
+
 
 	};
 }
