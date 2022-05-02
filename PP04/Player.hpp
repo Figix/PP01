@@ -29,7 +29,8 @@ namespace MuSeoun_Engine {
 			//y = 7;
 			// 나누는 용도 //
 			y += moveY;
-			if (y >= 8) { y = 7; }
+			if (y >= 9) { y = 9; }
+			if (y <= 1) { y = 1; }
 		}
 
 

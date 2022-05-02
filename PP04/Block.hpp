@@ -10,21 +10,13 @@ namespace MuSeoun_Engine {
 	public:
 		short x, y;
 		short movex;
-		bool blockcheck;
+		bool moveOn=false;
 		Player P;
 
 		Block() {
 			movex = 1;
-			x = 40;
-			y = 7;
-			blockcheck = false;
-		}
-		Block(short newY)
-		{
-			movex = 1;
-			x = 40;
-			y = newY;
-			blockcheck = false;
+			x = 70;
+			y = rand()%10;
 		}
 		~Block()
 		{
@@ -32,9 +24,12 @@ namespace MuSeoun_Engine {
 		}
 
 		void blockMove(short anotherX, short anotherY) {
-			x -= movex;
-			if (x <= 10) {
-				x = 40;
+			if (moveOn) {
+				x -= movex;
+				if (x <= 10) {
+					x = 50;
+					y = rand() % 10;
+				}
 			}
 		}
 	};
