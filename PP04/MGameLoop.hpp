@@ -81,10 +81,8 @@ namespace MuSeoun_Engine
 		}
 		void Update()
 		{
-			b[0].blockMove(p.x, p.y);
-			b[1].blockMove(p.x, p.y);
-			b[2].blockMove(p.x, p.y);
 			for (short i = 0; i < 3; i++) {
+				b[i].blockMove();
 				if (b[i].x == p.x) {
 					if ((b[i].y+2) < p.y || (b[i].y-2) > p.y) {
 					addcounter = 0;
@@ -137,6 +135,8 @@ namespace MuSeoun_Engine
 				cRenderer.DrawString("닿았대요 다시하고 싶으면 R눌러바");
 			}
 			
+
+
 			cRenderer.MoveCursor(10, 20);
 
 			renderDuration = chrono::system_clock::now() - startRenderTimePoint;

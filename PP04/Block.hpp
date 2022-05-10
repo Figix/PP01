@@ -23,7 +23,7 @@ namespace MuSeoun_Engine {
 
 		}
 
-		void blockMove(short anotherX, short anotherY) {
+		void blockMove() {
 			if (moveOn) {
 				x -= movex;
 				if (x <= 10) {
