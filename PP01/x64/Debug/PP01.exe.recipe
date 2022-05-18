@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <ProjectOutputs>
+    <ProjectOutput>
+<<<<<<< HEAD
+      <FullPath>C:\Users\YUHAN\source\repos\PP01\x64\Debug\PP01.exe</FullPath>
+=======
+      <FullPath>C:\Users\1202h\source\repos\PP01\x64\Debug\PP01.exe</FullPath>
+>>>>>>> 76f250f8008bb7215e1b00086780f14c3b197ec0
+    </ProjectOutput>
+  </ProjectOutputs>
+  <ContentFiles />
+  <SatelliteDlls />
+  <NonRecipeFileRefs />
+</Project>
