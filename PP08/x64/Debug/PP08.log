@@ -1,6 +1,7 @@
 ﻿  main.cpp
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\shared\minwindef.h(130,1): warning C4005: 'APIENTRY': 매크로 재정의
 A:\WorkSpace\C_doublePlus\PP01\packages\glfw.3.3.7\build\native\include\GLFW\glfw3.h(123): message : 'APIENTRY'의 이전 정의를 참조하십시오.
-A:\WorkSpace\C_doublePlus\PP01\PP08\OpenglGameLoop.hpp(140,12): warning C4244: '초기화 중': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-A:\WorkSpace\C_doublePlus\PP01\PP08\OpenglGameLoop.hpp(148,12): warning C4244: '초기화 중': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+A:\WorkSpace\C_doublePlus\PP01\PP08\OpenglGameLoop.hpp(148,1): warning C4305: '인수': 'double'에서 'GLclampf'(으)로 잘립니다.
+A:\WorkSpace\C_doublePlus\PP01\PP08\OpenglGameLoop.hpp(181,12): warning C4244: '초기화 중': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+A:\WorkSpace\C_doublePlus\PP01\PP08\OpenglGameLoop.hpp(189,12): warning C4244: '초기화 중': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   PP08.vcxproj -> A:\WorkSpace\C_doublePlus\PP01\x64\Debug\PP08.exe
